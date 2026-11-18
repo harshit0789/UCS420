@@ -1,0 +1,44 @@
+import re
+import string
+import nltk
+from nltk.tokenize import word_tokenize, sent_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, LancasterStemmer, WordNetLemmatizer
+from nltk.probability import FreqDist
+import pandas as pd
+
+# Download required NLTK datasets (run once)
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+
+# ==========================================
+# Q1. Paragraph Preprocessing & Frequency
+# ==========================================
+print("--- Q1: Paragraph Processing & Frequency Distribution ---")
+
+# Unique paragraph (5-6 sentences) about Artificial Intelligence & Technology
+paragraph = (
+    "Artificial intelligence is transforming modern technology at an unprecedented pace. "
+    "Machine learning models can analyze massive datasets to uncover hidden patterns and insights. "
+    "By 2026, advanced AI systems will seamlessly integrate into our daily workflows. "
+    "Developers are constantly building state-of-the-art applications for better user experiences. "
+    "You can reach out to support@ai-tech.org or visit https://ai-tech.com for more details. "
+    "Call us at +91 9876543210 or 123-456-7890 if you have any questions."
+)
+
+print("\nOriginal Text:\n", paragraph)
+
+# 1. Convert to lowercase and remove punctuation
+text_lower = paragraph.lower()
+text_no_punct = text_lower.translate(str.maketrans('', '', string.punctuation))
+print("\n1. Lowercase & No Punctuation:\n", text_no_punct)
+
+# 2. Tokenize text into words and sentences
+words = word_tokenize(text_no_punct)
+sentences = sent_tokenize(paragraph)
+print(f"\n2. Total Sentences: {len(sentences)} | Total Words: {len(words)}")
+
+# 3. Remove stopwords (using NLTK's stopwords list)
+stop_words = set(stopwords.words
