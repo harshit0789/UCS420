@@ -1,0 +1,50 @@
+
+# Q2: Working with Tuples
+
+# Create tuple using first 8 values of final list L
+scores = tuple(L[:8])
+
+print("Scores Tuple:", scores)
+
+# i. Highest score, its index, lowest score and frequency
+
+highest = max(scores)
+lowest = min(scores)
+
+print("Highest Score:", highest)
+print("Index of Highest Score:", scores.index(highest))
+print("Lowest Score:", lowest)
+print("Frequency of Lowest Score:", scores.count(lowest))
+
+# ii. Reverse tuple and convert it into a list
+
+reversed_list = list(scores[::-1])
+print("Reversed Tuple as List:", reversed_list)
+
+# Tuples are immutable, so their elements cannot be changed in place.
+
+# iii. Search for a score entered by the user
+
+user_score = int(input("Enter a score: "))
+
+if user_score in scores:
+    print("First Occurrence Index:", scores.index(user_score))
+else:
+    print("Score is not present in the tuple.")
+
+# iv. Attempt to modify tuple and capture the error
+
+try:
+    scores[0] = 100
+except TypeError as e:
+    print("Error:", e)
+
+# Tuples are immutable, unlike lists which allow modification.
+
+# v. Tuple unpacking using * operator
+
+first_score, second_score, *remaining_scores = scores
+
+print("First Score:", first_score)
+print("Second Score:", second_score)
+print("Remaining Scores:", remaining_scores)
