@@ -1,0 +1,41 @@
+
+# Q5: NumPy 2D Array Operations
+
+import numpy as np
+
+# Create a 2D array with 3 rows and 4 columns
+ucs420_harshit = np.array([
+    [10, 20, 30, 40],
+    [50, 60, 70, 80],
+    [90, 15, 20, 35]
+])
+
+print("Original Array:")
+print(ucs420_harshit)
+
+# Calculate mean
+print("\nMean:", np.mean(ucs420_harshit))
+
+# Calculate median
+print("Median:", np.median(ucs420_harshit))
+
+# Calculate maximum
+print("Maximum:", np.max(ucs420_harshit))
+
+# Calculate minimum
+print("Minimum:", np.min(ucs420_harshit))
+
+# Find unique elements
+print("Unique Elements:", np.unique(ucs420_harshit))
+
+# Reshape array into 4 rows and 3 columns
+reshaped_ucs420_harshit = ucs420_harshit.reshape(4, 3)
+
+print("\nReshaped Array (4x3):")
+print(reshaped_ucs420_harshit)
+
+# Resize array into 2 rows and 3 columns
+resized_ucs420_harshit = np.resize(ucs420_harshit, (2, 3))
+
+print("\nResized Array (2x3):")
+print(resized_ucs420_harshit)
