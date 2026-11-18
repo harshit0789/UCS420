@@ -1,0 +1,20 @@
+import numpy as np
+
+array = np.array([[1, -2, 3], [-4, 5, -6]])
+
+# i. Element-wise absolute value
+abs_array = np.abs(array)
+print("i. Element-wise absolute value:\n", abs_array)
+
+# ii. Percentiles (25th, 50th, 75th)
+flat_arr = array.flatten()
+print("\nii. Percentiles:")
+print("Flattened array (25th, 50th, 75th):", np.percentile(flat_arr, [25, 50, 75]))
+print("Column-wise (25th, 50th, 75th):", np.percentile(array, [25, 50, 75], axis=0))
+print("Row-wise (25th, 50th, 75th):", np.percentile(array, [25, 50, 75], axis=1))
+
+# iii. Mean, Median, and Standard Deviation
+print("\niii. Statistical Metrics:")
+print("Flattened -> Mean:", np.mean(flat_arr), "| Median:", np.median(flat_arr), "| Std:", np.std(flat_arr))
+print("Column-wise -> Mean:", np.mean(array, axis=0), "| Median:", np.median(array, axis=0), "| Std:", np.std(array, axis=0))
+print("Row-wise -> Mean:", np.mean(array, axis=1), "| Median:", np.median(array, axis=1), "| Std:", np.std(array, axis=1))
