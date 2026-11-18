@@ -1,0 +1,9 @@
+import numpy as np
+
+a = np.array([-1.8, -1.6, -0.5, 0.5, 1.6, 1.8, 3.0])
+
+print("Original Array:", a)
+print("Floor values:", np.floor(a))
+print("Ceiling values:", np.ceil(a))
+print("Truncated values:", np.trunc(a))
+print("Rounded values:", np.round(a))
