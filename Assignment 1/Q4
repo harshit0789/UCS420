@@ -1,0 +1,47 @@
+
+# Q4: Working with Sets
+
+# First 8 digits of roll number
+digits = [1, 0, 2, 4, 1, 7, 0, 2]
+
+# Create Set A and Set B
+A = {digit * 7 for digit in digits}
+B = {digit * 9 for digit in digits}
+
+# Print both sets
+print("Set A:", A)
+print("Set B:", B)
+
+# i. Union of A and B
+print("Union:", A.union(B))
+
+# ii. Intersection of A and B
+print("Intersection:", A.intersection(B))
+
+# iii. Difference of A and B separately
+print("A - B:", A.difference(B))
+print("B - A:", B.difference(A))
+
+# difference() returns elements present in one set
+# but not in the other set.
+
+# iv. Symmetric Difference
+print("Symmetric Difference:", A.symmetric_difference(B))
+
+# symmetric_difference() returns all elements
+# that are not common in both sets.
+
+# v. Check subset and superset
+print("Is A subset of B?", A.issubset(B))
+print("Is B superset of A?", B.issuperset(A))
+
+# vi. Input a value X from user
+X = int(input("Enter a value to remove from Set A: "))
+
+# Remove X using discard()
+A.discard(X)
+
+print("Set A after discard():", A)
+
+# discard() does not give an error if the element
+# is not present, unlike remove().
