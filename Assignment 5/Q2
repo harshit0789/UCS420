@@ -10,3 +10,55 @@ reversed_arr = arr[::-1]
 
 print("Original Array:", arr)
 print("Reversed Array:", reversed_arr)
+
+
+
+# Q2 (b-i): Most Frequent Value in Array X
+
+import numpy as np
+
+x = np.array([1, 2, 3, 4, 5, 1, 2, 1, 1, 1])
+
+# Find unique values and their frequencies
+values, counts = np.unique(x, return_counts=True)
+
+# Find maximum frequency
+max_count = np.max(counts)
+
+# Find most frequent values
+most_frequent = values[counts == max_count]
+
+print("Array X:", x)
+print("Most Frequent Value:", most_frequent)
+print("Frequency:", max_count)
+
+# Find indices of most frequent values
+for value in most_frequent:
+    indices = np.where(x == value)[0]
+
+
+# Q2 (b-ii): Most Frequent Value in Array Y
+
+import numpy as np
+
+y = np.array([1, 1, 1, 2, 3, 4, 2, 4, 3, 3])
+
+# Find unique values and their frequencies
+values, counts = np.unique(y, return_counts=True)
+
+# Find maximum frequency
+max_count = np.max(counts)
+
+# Find all most frequent values
+most_frequent = values[counts == max_count]
+
+print("Array Y:", y)
+print("Most Frequent Values:", most_frequent)
+print("Frequency:", max_count)
+
+# Print indices of all most frequent values
+for value in most_frequent:
+    indices = np.where(y == value)[0]
+    print("Indices of", value, ":", indices)
+
+    print("Indices of", value, ":", indices)
