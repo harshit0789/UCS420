@@ -1,0 +1,15 @@
+
+# Q3: Navigating the DataFrame
+
+# i. Select rows from index 3 to 7 (inclusive)
+print("Rows from index 3 to 7:")
+print(df.iloc[3:8])
+
+# ii. Select rows from index 4 to 8
+# and columns from index 2 to 4 (inclusive)
+print("\nRows 4 to 8 and Columns 2 to 4:")
+print(df.iloc[4:9, 2:5])
+
+# iii. Select all rows and columns from index 1 to 3
+print("\nAll Rows and Columns 1 to 3:")
+print(df.iloc[:, 1:4])
