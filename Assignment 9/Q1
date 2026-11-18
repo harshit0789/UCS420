@@ -41,4 +41,12 @@ sentences = sent_tokenize(paragraph)
 print(f"\n2. Total Sentences: {len(sentences)} | Total Words: {len(words)}")
 
 # 3. Remove stopwords (using NLTK's stopwords list)
-stop_words = set(stopwords.words
+stop_words = set(stopwords.words('english'))
+filtered_words = [w for w in words if w not in stop_words]
+print("\n3. Words after Stopword Removal:\n", filtered_words)
+
+# 4. Display word frequency distribution (excluding stopwords)
+fdist = FreqDist(filtered_words)
+print("\n4. Word Frequency Distribution:")
+for word, frequency in fdist.most_common(10):
+    print(f"  {word}: {frequency}")
