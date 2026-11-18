@@ -1,0 +1,48 @@
+
+# Q6: Handle Ties in Scoring Function
+
+def score_query_with_ties(query, df):
+
+    # Get all matching results using Q2 function
+    results = score_query(query, df)
+
+    if not results:
+        print("No matching FAQ found.")
+        return
+
+    # Find highest confidence score
+    highest_score = results[0]["confidence"]
+
+    # Select all entries having highest score
+    best_matches = [
+        result for result in results
+        if result["confidence"] == highest_score
+    ]
+
+    # Check whether a tie exists
+    if len(best_matches) > 1:
+        print("Tie detected! Multiple matching entries found.")
+    else:
+        print("No tie. Best matching entry found.")
+
+    # Print all highest scoring entries
+    print("\nBest Matching Results:")
+
+    for result in best_matches:
+        print("Question:", result["question"])
+        print("Answer:", result["answer"])
+        print("Category:", result["category"])
+        print("Confidence Score:", round(result["confidence"], 2))
+        print("------------------------")
+
+
+# Test Case 1: Query that produces a tie
+print("TEST CASE 1: Tie Query")
+
+score_query_with_ties("fee", df)
+
+
+# Test Case 2: Query that does not produce a tie
+print("\nTEST CASE 2: Non-Tie Query")
+
+score_query_with_ties("password reset", df)
