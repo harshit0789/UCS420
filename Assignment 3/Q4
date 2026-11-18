@@ -1,0 +1,11 @@
+
+# Q4: Reading a CSV File
+
+import pandas as pd
+
+# Read CSV file
+iris_df = pd.read_csv("Iris.csv")
+
+# Display first five rows
+print("First Five Rows of Iris Dataset:")
+print(iris_df.head())
