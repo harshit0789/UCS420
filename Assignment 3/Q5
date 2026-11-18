@@ -1,0 +1,18 @@
+
+# Q5: Deleting a Row and a Column
+
+import pandas as pd
+
+# Read CSV file
+iris_df = pd.read_csv("Iris.csv")
+
+# Delete row with index 4
+iris_df = iris_df.drop(index=4)
+
+# Delete column with index 3
+column_name = iris_df.columns[3]
+iris_df = iris_df.drop(columns=column_name)
+
+# Display modified DataFrame
+print("DataFrame after deleting row 4 and column 3:")
+print(iris_df)
