@@ -1,0 +1,33 @@
+import re
+
+# Original text from Q1
+paragraph = (
+    "Artificial intelligence is transforming modern technology at an unprecedented pace. "
+    "Machine learning models can analyze massive datasets to uncover hidden patterns and insights. "
+    "By 2026, advanced AI systems will seamlessly integrate into our daily workflows. "
+    "Developers are constantly building state-of-the-art applications for better user experiences. "
+    "You can reach out to support@ai-tech.org or visit https://ai-tech.com for more details. "
+    "Call us at +91 9876543210 or 123-456-7890 if you have any questions."
+)
+
+print("--- Regular Expressions (re.findall) ---")
+# a. Extract all words with more than 5 letters
+words_gt_5 = re.findall(r'\b[A-Za-z]{6,}\b', paragraph)
+print("a. Words with > 5 letters:", words_gt_5)
+
+# b. Extract all numbers (if any exist in their text)
+numbers_ext = re.findall(r'\b\d+(?:\.\d+)?\b', paragraph)
+print("b. Numbers extracted:", numbers_ext)
+
+# c. Extract all capitalized words
+capitalized_words = re.findall(r'\b[A-Z][a-z]*\b', paragraph)
+print("c. Capitalized words:", capitalized_words)
+
+print("\n--- Text Splitting Techniques ---")
+# a. Split text into words containing only alphabets (removing digits and special characters)
+alpha_words = re.findall(r'\b[A-Za-z]+\b', paragraph)
+print("a. Words containing only alphabets:", alpha_words)
+
+# b. Extract words starting with a vowel
+vowel_words = re.findall(r'\b[aeiouAEIOU][a-zA-Z]*\b', paragraph)
+print("b. Words starting with a vowel:", vowel_words)
