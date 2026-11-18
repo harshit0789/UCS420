@@ -1,0 +1,20 @@
+def swap_set_elements(input_set, val1, val2):
+    print(f"Original set: {input_set}")
+    
+    # Convert set to a list
+    lst = list(input_set)
+    
+    # Find indices of the elements to swap
+    idx1 = lst.index(val1)
+    idx2 = lst.index(val2)
+    
+    # Swap elements in the list
+    lst[idx1], lst[idx2] = lst[idx2], lst[idx1]
+    
+    # Convert back to a set (note: order may vary due to set properties)
+    updated_set = set(lst)
+    print(f"Updated set after swapping {val1} and {val2}: {updated_set}")
+
+# Example usage:
+my_set = {10, 20, 30, 40}
+swap_set_elements(my_set, 20, 40)
