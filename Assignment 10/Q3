@@ -1,0 +1,33 @@
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+# Choose 3 short texts (product reviews/news)
+texts = [
+    "The smartphone camera quality is exceptional and battery life is impressive.",
+    "Battery life on this phone is terrible and the screen stopped working.",
+    "An exceptional camera setup makes this smartphone worth every penny."
+]
+
+# 1. CountVectorizer for Bag of Words
+count_vec = CountVectorizer()
+bow_matrix = count_vec.fit_transform(texts)
+bow_df = pd.DataFrame(bow_matrix.toarray(), columns=count_vec.get_feature_names_out())
+
+print("--- Bag of Words (CountVectorizer) ---")
+print(bow_df)
+
+# 2. TfidfVectorizer for TF-IDF scores
+tfidf_vec = TfidfVectorizer()
+tfidf_matrix = tfidf_vec.fit_transform(texts)
+tfidf_df = pd.DataFrame(tfidf_matrix.toarray(), columns=tfidf_vec.get_feature_names_out())
+
+print("\n--- TF-IDF Scores ---")
+print(tfidf_df)
+
+# 3. Print and interpret top 3 keywords from each text using TF-IDF
+feature_names = tfidf_vec.get_feature_names_out()
+print("\n--- Top 3 Keywords per Text (TF-IDF Interpretation) ---")
+for i, row in enumerate(tfidf_matrix.toarray()):
+    top_indices = row.argsort()[-3:][::-1]
+    top_keywords = [(feature_names[idx], row[idx]) for idx in top_indices]
+    print(f"Text {i+1} Top Keywords: {top_keywords}")
