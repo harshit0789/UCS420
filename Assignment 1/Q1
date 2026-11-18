@@ -1,0 +1,51 @@
+
+# Q1: Working with Lists
+
+# Extract digits of roll number and multiply each by 10
+roll_no = "1024170283"
+L = [int(digit) * 10 for digit in roll_no]
+
+# i. Print original list
+print("Original List:", L)
+
+# ii. Add elements using append() and insert()
+
+L.append(55)
+print("After append():", L)
+# append() adds an element at the end of the list.
+
+L.insert(2, 25)
+print("After insert():", L)
+# insert() adds an element at the specified index.
+
+# iii. Remove elements using remove() and pop()
+
+L.remove(10)
+print("After remove():", L)
+# remove() deletes the first occurrence of the given value.
+
+L.pop()
+print("After pop():", L)
+# pop() removes and returns the last element.
+
+# iv. Sort in ascending and descending order
+
+L.sort()
+print("Ascending Order:", L)
+
+L.sort(reverse=True)
+print("Descending Order:", L)
+
+# v. Slicing
+
+print("First Three Elements:", L[:3])
+print("Last Three Elements:", L[-3:])
+
+# vi. List comprehension: elements greater than average
+
+average = sum(L) / len(L)
+
+greater_than_average = [x for x in L if x > average]
+
+print("Average:", average)
+print("Elements Greater Than Average:", greater_than_average)
