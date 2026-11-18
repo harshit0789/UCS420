@@ -1,0 +1,52 @@
+
+# Q3: Random Numbers
+
+import random
+
+# Set random seed using roll number
+random.seed(1024170283)
+
+# i. Generate 100 random numbers between 100 and 900
+numbers = [random.randint(100, 900) for i in range(100)]
+
+print("Random Numbers:", numbers)
+
+# ii. Count odd numbers
+odd_numbers = [n for n in numbers if n % 2 != 0]
+
+print("Odd Numbers Count:", len(odd_numbers))
+
+# iii. Count even numbers
+even_numbers = [n for n in numbers if n % 2 == 0]
+
+print("Even Numbers Count:", len(even_numbers))
+
+# Function to check whether a number is prime
+def is_prime(n):
+    if n < 2:
+        return False
+
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+
+    return True
+
+# iv. Count prime numbers and create prime list using comprehension
+
+prime_numbers = [n for n in numbers if is_prime(n)]
+
+print("Prime Numbers:", prime_numbers)
+print("Prime Numbers Count:", len(prime_numbers))
+
+# v. Find the most frequently occurring number
+
+frequency = {}
+
+for n in numbers:
+    frequency[n] = frequency.get(n, 0) + 1
+
+most_frequent = max(frequency, key=frequency.get)
+
+print("Most Frequent Number:", most_frequent)
+print("Frequency:", frequency[most_frequent])
