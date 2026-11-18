@@ -1,0 +1,38 @@
+
+# Q1: Plot Mathematical Functions
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Ask user to enter value of M
+M = float(input("Enter the value of M: "))
+
+# Generate x values from -10 to 10
+x = np.linspace(-10, 10, 100)
+
+# Calculate y values
+y1 = M * (x ** 2)
+y2 = M * np.sin(x)
+
+# Create figure
+plt.figure(figsize=(10, 6))
+
+# Plot first function
+plt.plot(x, y1, color='blue', linestyle='-',
+         label='y = M * x^2')
+
+# Plot second function
+plt.plot(x, y2, color='red', linestyle='--',
+         label='y = M * sin(x)')
+
+# Add title and labels
+plt.title("Mathematical Functions")
+plt.xlabel("X Values")
+plt.ylabel("Y Values")
+
+# Add legend and grid
+plt.legend()
+plt.grid(True)
+
+# Display graph
+plt.show()
