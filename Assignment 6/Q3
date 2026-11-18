@@ -1,0 +1,50 @@
+
+# Q3: Random Dataset and 2x2 Subplots
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set random seed using roll number
+np.random.seed(1024170283)
+
+# Generate 50 random values
+data = np.random.randn(50)
+
+# Generate random noise
+noise = np.random.randn(50)
+
+# Create x values
+x = np.arange(1, 51)
+
+# Calculate cumulative sum
+cumulative_sum = np.cumsum(data)
+
+# Create 2x2 subplot layout
+fig, ax = plt.subplots(2, 2, figsize=(12, 8))
+
+# First subplot: Line plot of cumulative sum
+ax[0, 0].plot(x, cumulative_sum, color='blue')
+ax[0, 0].set_title("Cumulative Sum Line Plot")
+ax[0, 0].set_xlabel("Index")
+ax[0, 0].set_ylabel("Cumulative Sum")
+ax[0, 0].grid(True)
+
+# Second subplot: Scatter plot with random noise
+ax[0, 1].scatter(x, data + noise, color='red')
+ax[0, 1].set_title("Scatter Plot with Random Noise")
+ax[0, 1].set_xlabel("Index")
+ax[0, 1].set_ylabel("Values with Noise")
+ax[0, 1].grid(True)
+
+# Turn off unused subplots
+ax[1, 0].axis('off')
+ax[1, 1].axis('off')
+
+# Add main title
+fig.suptitle("Random Dataset Visualization", fontsize=16)
+
+# Adjust layout
+plt.tight_layout()
+
+# Display plots
+plt.show()
