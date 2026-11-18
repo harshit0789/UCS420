@@ -1,0 +1,57 @@
+
+# Q2: Generate and Score a Hypothesis
+
+def score_query(query, df):
+
+    query_words = set(query.lower().split())
+
+    results = []
+
+    for index, row in df.iterrows():
+
+        keywords = set(row["keywords"].lower().split())
+
+        # Find matching keywords
+        matched_words = query_words.intersection(keywords)
+
+        # Calculate confidence score
+        if len(keywords) > 0:
+            confidence = len(matched_words) / len(keywords)
+        else:
+            confidence = 0
+
+        # Store matching results
+        if confidence > 0:
+            results.append({
+                "question": row["question"],
+                "answer": row["answer"],
+                "category": row["category"],
+                "matched_keywords": list(matched_words),
+                "confidence": confidence
+            })
+
+    # Sort results by confidence in descending order
+    results = sorted(
+        results,
+        key=lambda x: x["confidence"],
+        reverse=True
+    )
+
+    return results
+
+
+# Test the scoring function
+query = "how to reset password"
+
+results = score_query(query, df)
+
+print("Query:", query)
+print("\nMatching Results:")
+
+for result in results:
+    print("Question:", result["question"])
+    print("Answer:", result["answer"])
+    print("Category:", result["category"])
+    print("Matched Keywords:", result["matched_keywords"])
+    print("Confidence Score:", round(result["confidence"], 2))
+    print("------------------------")
