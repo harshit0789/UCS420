@@ -1,0 +1,49 @@
+import string
+import re
+import nltk
+from nltk.tokenize import word_tokenize, sent_tokenize
+from nltk.corpus import stopwords
+from nltk.probability import FreqDist
+
+# Download required NLTK datasets
+nltk.download('punkt')
+nltk.download('stopwords')
+
+# Unique paragraph (5-6 sentences) about Technology
+paragraph = (
+    "Quantum computing represents a revolutionary leap forward in information processing. "
+    "Unlike classical computers that use binary bits, quantum systems leverage qubits to process complex data simultaneously. "
+    "This breakthrough will drastically transform cryptography, drug discovery, and artificial intelligence. "
+    "Researchers around the globe are racing to build stable, fault-tolerant quantum hardware. "
+    "The future of technology relies heavily on these mind-bending scientific advancements."
+)
+
+print("Original Text:\n", paragraph)
+
+# 1. Convert text to lowercase and remove punctuation using re
+text_lower = paragraph.lower()
+text_no_punct = re.sub(r'[^\w\s]', '', text_lower)
+print("\n1. Lowercase & No Punctuation:\n", text_no_punct)
+
+# 2. Tokenize the text into words and sentences
+words_nltk = word_tokenize(text_no_punct)
+sentences = sent_tokenize(paragraph)
+print(f"\n2. Total Sentences: {len(sentences)} | Total NLTK Words: {len(words_nltk)}")
+
+# 3. Compare Python split() vs NLTK's word_tokenize()
+split_words = text_no_punct.split()
+print("\n3. Comparison:")
+print("  - Python split() count:", len(split_words))
+print("  - NLTK word_tokenize() count:", len(words_nltk))
+print("  - Difference: word_tokenize() handles attached punctuation/symbols better if any remain.")
+
+# 4. Remove stopwords (using NLTK's stopwords list)
+stop_words = set(stopwords.words('english'))
+filtered_words = [w for w in words_nltk if w not in stop_words]
+print("\n4. Words after Stopword Removal:\n", filtered_words)
+
+# 5. Display word frequency distribution (excluding stopwords)
+fdist = FreqDist(filtered_words)
+print("\n5. Word Frequency Distribution:")
+for word, frequency in fdist.most_common(10):
+    print(f"  {word}: {frequency}")
