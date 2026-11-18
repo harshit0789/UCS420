@@ -1,0 +1,42 @@
+
+# Q4: NumPy linspace() and Array Properties
+
+import numpy as np
+
+# Create an array of 25 evenly spaced numbers
+harshit = np.linspace(10, 100, 25)
+
+# Print the array
+print("NumPy Array:")
+print(harshit)
+
+# Print dimensions
+print("\nDimensions:", harshit.ndim)
+
+# Print shape
+print("Shape:", harshit.shape)
+
+# Print total number of elements
+print("Total Elements:", harshit.size)
+
+# Print data type
+print("Data Type:", harshit.dtype)
+
+# Print total bytes consumed
+print("Total Bytes:", harshit.nbytes)
+
+# Transpose using reshape()
+reshaped_array = harshit.reshape(25, 1)
+
+print("\nTranspose using reshape():")
+print(reshaped_array)
+
+# Transpose using T attribute
+transposed_array = reshaped_array.T
+
+print("\nTranspose using T attribute:")
+print(transposed_array)
+
+# Check shapes
+print("\nReshaped Array Shape:", reshaped_array.shape)
+print("Transposed Array Shape:", transposed_array.shape)
