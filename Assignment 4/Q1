@@ -1,0 +1,83 @@
+
+# Q1: Build Personalized Knowledge Base
+
+import pandas as pd
+
+# Four fixed FAQ entries
+fixed_entries = [
+    {
+        "question": "what is the annual fee",
+        "answer": "The annual fee is Rs 500.",
+        "keywords": "fee cost price charge",
+        "category": "billing"
+    },
+    {
+        "question": "how to reset password",
+        "answer": "Go to Settings > Reset Password.",
+        "keywords": "password reset login",
+        "category": "account"
+    },
+    {
+        "question": "what are your working hours",
+        "answer": "We are open 9 AM to 5 PM.",
+        "keywords": "hours timing open time",
+        "category": "general"
+    },
+    {
+        "question": "how can i pay the fee",
+        "answer": "You can pay via UPI, card, or net banking.",
+        "keywords": "pay payment upi fee",
+        "category": "billing"
+    }
+]
+
+# Roll number
+roll_no = "1024170283"
+
+# Take last two digits
+last_two_digits = roll_no[-2:]
+
+# Categories
+categories = ["billing", "account", "general"]
+
+# Create personalized entries
+personalized_entries = []
+
+for digit in last_two_digits:
+    category = categories[int(digit) % 3]
+
+    if category == "general":
+        entry = {
+            "question": "where can i find college office information",
+            "answer": "You can find college office information on the official college website.",
+            "keywords": "college office information website",
+            "category": category
+        }
+
+    elif category == "billing":
+        entry = {
+            "question": "how can i check my pending fee payment",
+            "answer": "You can check your pending fee payment through the student fee portal.",
+            "keywords": "installment invoice pending due",
+            "category": category
+        }
+
+    elif category == "account":
+        entry = {
+            "question": "how can i update my account details",
+            "answer": "You can update your details through account settings.",
+            "keywords": "account update details profile",
+            "category": category
+        }
+
+    personalized_entries.append(entry)
+
+# Combine all six entries
+all_entries = fixed_entries + personalized_entries
+
+# Create DataFrame
+df = pd.DataFrame(all_entries)
+
+# Display final DataFrame
+print("Final FAQ Knowledge Base:")
+print(df)
