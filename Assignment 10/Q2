@@ -1,0 +1,45 @@
+import re
+import pandas as pd
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+
+# Using the same paragraph from Q1
+paragraph = (
+    "Quantum computing represents a revolutionary leap forward in information processing. "
+    "Unlike classical computers that use binary bits, quantum systems leverage qubits to process complex data simultaneously. "
+    "This breakthrough will drastically transform cryptography, drug discovery, and artificial intelligence. "
+    "Researchers around the globe are racing to build stable, fault-tolerant quantum hardware. "
+    "The future of technology relies heavily on these mind-bending scientific advancements."
+)
+
+# 1. Extract all words with only alphabets using re.findall()
+alpha_words = re.findall(r'\b[A-Za-z]+\b', paragraph.lower())
+
+# 2. Remove stop words using NLTK’s stopword list
+stop_words = set(stopwords.words('english'))
+filtered_tokens = [w for w in alpha_words if w not in stop_words]
+
+# 3. & 4. Perform Stemming (Porter) and Lemmatization (WordNet)
+porter = PorterStemmer()
+lemmatizer = WordNetLemmatizer()
+
+comparison_data = []
+for word in filtered_tokens:
+    comparison_data.append({
+        'Token': word,
+        'Stemmed (Porter)': porter.stem(word),
+        'Lemmatized': lemmatizer.lemmatize(word)
+    })
+
+df_comparison = pd.DataFrame(comparison_data)
+print("--- Stemming vs Lemmatization Comparison ---")
+print(df_comparison.to_string(index=False))
+
+print("\nExplanation:")
+print("- Stemming chops off word suffixes heuristically, often resulting in non-dictionary roots (e.g., 'computing' -> 'comput'). Preferred for speed in search indexing.")
+print("- Lemmatization uses vocabulary and morphological analysis to return valid dictionary root words (e.g., 'computing' -> 'compute'). Preferred when accurate semantic meaning is required.")
