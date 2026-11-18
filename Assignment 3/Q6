@@ -1,0 +1,116 @@
+
+# Q6: Employee Dataset using Pandas
+
+import pandas as pd
+
+# Create employee dataset
+data = {
+    "Employee_ID": [101, 102, 103, 104, 105],
+    "Name": ["Alice", "Bob", "Charlie", "Diana", "Edward"],
+    "Department": ["HR", "IT", "IT", "Marketing", "Sales"],
+    "Age": [29, 34, 41, 28, 38],
+    "Salary": [50000, 70000, 65000, 55000, 60000],
+    "Years_of_Experience": [4, 8, 10, 3, 12],
+    "Joining_Date": ["2020-03-15", "2017-07-19",
+                     "2013-06-01", "2021-02-10", "2010-11-25"],
+    "Gender": ["Female", "Male", "Male", "Female", "Male"],
+    "Bonus": [5000, 7000, 6000, 4500, 5000],
+    "Rating": [4.5, 4.0, 3.8, 4.7, 3.5]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Save dataset as employees.csv
+df.to_csv("employees.csv", index=False)
+
+print("Employee Dataset:")
+print(df)
+
+# a) Shape of DataFrame
+print("\n(a) Shape of DataFrame:")
+print(df.shape)
+
+# b) Summary including data types and non-null counts
+print("\n(b) DataFrame Information:")
+df.info()
+
+# c) Generate descriptive statistics
+print("\n(c) Descriptive Statistics:")
+print(df.describe())
+
+# d) Display first 5 rows and last 3 rows
+print("\n(d) First 5 Rows:")
+print(df.head(5))
+
+print("\nLast 3 Rows:")
+print(df.tail(3))
+
+# e) Calculate statistics
+
+# i. Average salary
+print("\n(e) Average Salary:")
+print(df["Salary"].mean())
+
+# ii. Total bonus
+print("\nTotal Bonus:")
+print(df["Bonus"].sum())
+
+# iii. Youngest employee's age
+print("\nYoungest Employee Age:")
+print(df["Age"].min())
+
+# iv. Highest performance rating
+print("\nHighest Performance Rating:")
+print(df["Rating"].max())
+
+# f) Sort by Salary in descending order
+print("\n(f) Employees Sorted by Salary:")
+df = df.sort_values(by="Salary", ascending=False)
+print(df)
+
+# g) Add performance category column
+
+def performance_category(rating):
+    if rating >= 4.5:
+        return "Excellent"
+    elif rating >= 4.0:
+        return "Good"
+    else:
+        return "Average"
+
+df["Performance"] = df["Rating"].apply(performance_category)
+
+print("\n(g) Performance Categories:")
+print(df[["Name", "Rating", "Performance"]])
+
+# h) Identify missing values
+print("\n(h) Missing Values:")
+print(df.isnull().sum())
+
+# i) Rename Employee_ID column to ID
+df = df.rename(columns={"Employee_ID": "ID"})
+
+print("\n(i) Renamed Column:")
+print(df)
+
+# j) Find employees
+
+# i. More than 5 years of experience
+print("\n(j-i) Employees with More Than 5 Years Experience:")
+print(df[df["Years_of_Experience"] > 5])
+
+# ii. Employees belonging to IT department
+print("\n(j-ii) Employees in IT Department:")
+print(df[df["Department"] == "IT"])
+
+# k) Add Tax column (10% of Salary)
+df["Tax"] = df["Salary"] * 0.10
+
+print("\n(k) Tax Column Added:")
+print(df[["Name", "Salary", "Tax"]])
+
+# l) Save modified DataFrame to a new CSV file
+df.to_csv("modified_employees.csv", index=False)
+
+print("\n(l) Modified dataset saved as modified_employees.csv")
