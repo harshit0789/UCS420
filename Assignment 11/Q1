@@ -1,0 +1,41 @@
+import cv2
+import matplotlib.pyplot as plt
+import easyocr
+
+# 1. Initialize the EasyOCR Reader for English
+# (It automatically downloads lightweight pre-trained models on first run)
+reader = easyocr.Reader(['en'])
+
+# 2. Load the image of the medicine bottle
+# Replace 'medicine_bottle.jpg' with your actual image path
+image_path = 'medicine_bottle.jpg'
+image = cv2.imread(image_path)
+
+if image is None:
+    print(f"Error: Could not load image from {image_path}. Please check the path.")
+else:
+    # Convert BGR to RGB for correct matplotlib display
+    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+    # 3. Perform OCR on the image
+    results = reader.readtext(image_rgb)
+
+    print("--- Extracted Medicine Label Text ---")
+    extracted_text = []
+    for bbox, text, prob in results:
+        print(f"Detected Text: '{text}' (Confidence: {prob:.2f})")
+        extracted_text.append(text)
+        
+        # Draw bounding box and text on image for visualization
+        top_left = tuple(map(int, bbox[0]))
+        bottom_right = tuple(map(int, bbox[2]))
+        cv2.rectangle(image_rgb, top_left, bottom_right, (0, 255, 0), 2)
+        cv2.putText(image_rgb, text, (top_left[0], top_left[1] - 10), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
+
+    # 4. Display the annotated image
+    plt.figure(figsize=(8, 8))
+    plt.imshow(image_rgb)
+    plt.axis('inf')
+    plt.title('Cognitive Assistant - Medicine Bottle Label Reader')
+    plt.show()
