@@ -1,0 +1,83 @@
+
+# Q5: Working with Dictionaries
+
+# Original Dictionary
+my_dict = {
+    "name": "Your Name",
+    "roll_no": "1024170283",
+    "branch": "Your Branch",
+    "age": 20,
+    "city": "Your Home City"
+}
+
+print("Original Dictionary:", my_dict)
+
+# i. Rename city key to location using pop()
+my_dict["location"] = my_dict.pop("city")
+
+print("After Renaming City:", my_dict)
+
+# ii. Add CGPA
+my_dict["cgpa"] = 6.5
+
+print("After Adding CGPA:", my_dict)
+
+# iii. Increase age by 1
+my_dict["age"] += 1
+
+print("After Updating Age:", my_dict)
+
+# iv. Delete branch using two different methods
+
+# Method 1: Using pop()
+dict_pop = my_dict.copy()
+dict_pop.pop("branch")
+
+print("Dictionary after pop():", dict_pop)
+
+# Method 2: Using del keyword
+dict_del = my_dict.copy()
+del dict_del["branch"]
+
+print("Dictionary after del:", dict_del)
+
+# pop() returns the removed value,
+# whereas del deletes the key without returning its value.
+
+# v. Iterate through dictionary using items()
+print("Key-Value Pairs:")
+
+for key, value in my_dict.items():
+    print(key, "→", value)
+
+# vi. Check whether email key exists
+if "email" in my_dict:
+    print("Email:", my_dict["email"])
+else:
+    print("Email key does not exist.")
+
+# vii. Create a friend's dictionary
+friend_dict = {
+    "name": "Rahul",
+    "roll_no": "1024170999",
+    "branch": "CSE",
+    "age": 21,
+    "city": "Chandigarh"
+}
+
+# Merge both dictionaries using unpacking
+merged_dict = {**my_dict, **friend_dict}
+
+print("Merged Dictionary:", merged_dict)
+
+# Values of the second dictionary win
+# when both dictionaries have the same key.
+
+# viii. Dictionary comprehension
+string_dict = {
+    key: value
+    for key, value in my_dict.items()
+    if isinstance(value, str)
+}
+
+print("Dictionary with String Values:", string_dict)
