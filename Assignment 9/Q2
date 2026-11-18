@@ -1,0 +1,30 @@
+import pandas as pd
+import nltk
+from nltk.stem import PorterStemmer, LancasterStemmer, WordNetLemmatizer
+
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+
+# Assuming filtered_words from Q1 are available, or re-defining a sample list here:
+# (Make sure Q1 code has been executed before running this if using 'filtered_words')
+try:
+    tokens_to_process = filtered_words
+except NameError:
+    tokens_to_process = ['artificial', 'intelligence', 'transforming', 'modern', 'technology', 'models', 'analyze', 'datasets']
+
+porter = PorterStemmer()
+lancaster = LancasterStemmer()
+lemmatizer = WordNetLemmatizer()
+
+stem_lemma_data = []
+for word in tokens_to_process:
+    stem_lemma_data.append({
+        'Token': word,
+        'Porter Stemmer': porter.stem(word),
+        'Lancaster Stemmer': lancaster.stem(word),
+        'Lemmatizer': lemmatizer.lemmatize(word)
+    })
+
+df_stem_lemma = pd.DataFrame(stem_lemma_data)
+print("--- Stemming and Lemmatization Comparison ---")
+print(df_stem_lemma.to_string(index=False))
