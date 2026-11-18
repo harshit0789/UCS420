@@ -1,0 +1,42 @@
+import cv2
+import matplotlib.pyplot as plt
+from deepface import DeepFace
+
+# 1. Load an image of a face for expression detection
+# Replace 'face_image.jpg' with your test image path
+image_path = 'face_image.jpg'
+image = cv2.imread(image_path)
+
+if image is None:
+    print(f"Error: Could not load image from {image_path}. Please check the path.")
+else:
+    # Convert BGR to RGB
+    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+    try:
+        # 2. Analyze facial expressions using DeepFace
+        # enforce_detection=False prevents crashes if a face isn't completely clear
+        analysis = DeepFace.analyze(image_rgb, actions=['emotion'], enforce_detection=False)
+        
+        # Handle list or single dict return format from DeepFace versions
+        if isinstance(analysis, list):
+            analysis = analysis[0]
+            
+        dominant_emotion = analysis['dominant_emotion']
+        emotion_scores = analysis['emotion']
+
+        print("--- Emotion Analysis Results ---")
+        print(f"Dominant Emotion Detected: {dominant_emotion.upper()}")
+        print("\nAll Emotion Probabilities:")
+        for emotion, score in emotion_scores.items():
+            print(f"  - {emotion.capitalize()}: {score:.2f}%")
+
+        # 3. Annotate image with the dominant emotion
+        plt.figure(figsize=(8, 8))
+        plt.imshow(image_rgb)
+        plt.axis('off')
+        plt.title(f"Emotion-Aware Assistant | Detected State: {dominant_emotion.upper()}", fontsize=14, color='blue')
+        plt.show()
+
+    except Exception as e:
+        print(f"An error occurred during facial analysis: {e}")
