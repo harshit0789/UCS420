@@ -1,0 +1,105 @@
+
+# Q4: Company Sales Data Visualization using Seaborn
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Read CSV file directly from GitHub
+url = "https://raw.githubusercontent.com/AnjulaMehto/MCA/main/company_sales_data.csv"
+
+df = pd.read_csv(url)
+
+# Display dataset
+print("Company Sales Dataset:")
+print(df.head())
+
+# 1. Line plot of total profit of all months
+
+plt.figure(figsize=(10, 5))
+
+sns.lineplot(
+    data=df,
+    x="month_number",
+    y="total_profit",
+    marker="o",
+    color="blue"
+)
+
+plt.title("Total Profit of All Months")
+plt.xlabel("Month Number")
+plt.ylabel("Total Profit")
+plt.grid(True)
+
+plt.show()
+
+
+# 2. Multiline plot for all product sales data
+
+products = [
+    "facecream",
+    "facewash",
+    "toothpaste",
+    "bathingsoap",
+    "shampoo",
+    "moisturizer"
+]
+
+plt.figure(figsize=(12, 6))
+
+for product in products:
+    sns.lineplot(
+        data=df,
+        x="month_number",
+        y=product,
+        marker="o",
+        label=product
+    )
+
+plt.title("Monthly Product Sales Data")
+plt.xlabel("Month Number")
+plt.ylabel("Number of Units Sold")
+plt.legend()
+plt.grid(True)
+
+plt.show()
+
+
+# 3. Bar charts for all numerical features/attributes
+
+numeric_columns = df.select_dtypes(include="number").columns
+
+# Exclude month_number because it is the x-axis
+features = [col for col in numeric_columns if col != "month_number"]
+
+fig, axes = plt.subplots(
+    3, 3,
+    figsize=(15, 12)
+)
+
+axes = axes.flatten()
+
+for i, column in enumerate(features):
+
+    sns.barplot(
+        data=df,
+        x="month_number",
+        y=column,
+        ax=axes[i],
+        color="skyblue"
+    )
+
+    axes[i].set_title(column)
+    axes[i].set_xlabel("Month")
+    axes[i].set_ylabel(column)
+    axes[i].grid(axis="y", alpha=0.4)
+
+# Hide unused subplot spaces
+for j in range(len(features), len(axes)):
+    axes[j].axis("off")
+
+plt.suptitle("Bar Charts of Company Sales Features", fontsize=16)
+
+plt.tight_layout()
+plt.show()
+
