@@ -1,0 +1,10 @@
+
+
+# Q5: Count FAQ Entries Per Category
+
+# Group DataFrame by category and count entries
+category_count = df.groupby("category").size()
+
+# Display category-wise count
+print("Number of FAQ Entries Per Category:")
+print(category_count)
