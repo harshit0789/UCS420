@@ -1,0 +1,27 @@
+
+# Q4: Add New Keyword and Save CSV File
+
+# Select first FAQ entry
+entry_index = 0
+
+# Ask user to enter a new keyword
+new_keyword = input("Enter a new keyword: ").lower().strip()
+
+# Get existing keywords
+existing_keywords = df.loc[entry_index, "keywords"]
+
+# Add keyword if it does not already exist
+if new_keyword and new_keyword not in existing_keywords.split():
+    df.loc[entry_index, "keywords"] = existing_keywords + " " + new_keyword
+    print("New keyword added successfully!")
+else:
+    print("Keyword is empty or already exists.")
+
+# Display updated entry
+print("\nUpdated FAQ Entry:")
+print(df.iloc[entry_index])
+
+# Save complete DataFrame to CSV
+df.to_csv("1024170283_faq_data.csv", index=False)
+
+print("\nDataFrame saved as 1024170283_faq_data.csv")
