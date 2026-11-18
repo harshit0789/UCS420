@@ -1,0 +1,11 @@
+def swap_list_elements(lst, idx1, idx2):
+    print(f"Original list: {lst}")
+    # Using a temporary variable to swap
+    temp = lst[idx1]
+    lst[idx1] = lst[idx2]
+    lst[idx2] = temp
+    print(f"List after swapping indices {idx1} and {idx2}: {lst}")
+
+# Example usage:
+my_list = [10, 20, 30, 40, 50]
+swap_list_elements(my_list, 1, 3)
