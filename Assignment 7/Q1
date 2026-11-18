@@ -1,0 +1,81 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 1. Initialize Random Seed using the roll number
+roll_number = 1024170283
+np.random.seed(roll_number)
+
+# 2. Generate Sales Data for 12 months and 4 categories (Electronics, Clothing, Home & Kitchen, Sports)
+# Sales values between 1000 and 5000 units
+sales_data = np.random.randint(1000, 5001, size=(12, 4))
+
+# 3. Convert to Pandas DataFrame
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+categories = ['Electronics', 'Clothing', 'Home & Kitchen', 'Sports']
+
+df = pd.DataFrame(sales_data, index=months, columns=categories)
+print("--- Initial Sales DataFrame ---")
+print(df.head())
+
+# 1. Display the first 5 rows and summary statistics
+print("--- First 5 Rows ---")
+display(df.head(5))
+
+print("\n--- Summary Statistics ---")
+display(df.describe())
+
+# 2. Calculate total sales per category and total sales per month
+total_sales_per_category = df.sum(axis=0)
+total_sales_per_month = df.sum(axis=1)
+
+print("\n--- Total Sales Per Category ---")
+print(total_sales_per_category)
+
+print("\n--- Total Sales Per Month ---")
+print(total_sales_per_month)
+
+# 3. Calculate average sales growth between consecutive months for each category
+monthly_growth = df.diff().mean()
+print("\n--- Average Sales Growth Between Consecutive Months ---")
+print(monthly_growth)
+
+# 4. Add Total Sales and Growth Rate columns to the DataFrame
+df['Total Sales'] = df.sum(axis=1)
+df['Growth Rate (%)'] = df['Total Sales'].pct_change() * 100
+
+print("\n--- DataFrame with Total Sales and Growth Rate ---")
+display(df[['Total Sales', 'Growth Rate (%)']])
+
+# 5. Apply a randomized discount based on roll number parity
+# Since roll number 1024170283 is ODD, apply a 15% discount to the Clothing category
+df['Clothing'] = df['Clothing'] * 0.85
+
+print("\n--- DataFrame after Applying 15% Discount to Clothing ---")
+display(df.head())
+
+# Configure plot styling
+sns.set_theme(style="whitegrid")
+
+# 1. Plot monthly sales trends for each category using line plots
+plt.figure(figsize=(10, 6))
+for category in categories:
+    plt.plot(df.index, df[category], marker='o', label=category)
+
+plt.title('Monthly Sales Trends by Product Category', fontsize=14)
+plt.xlabel('Months', fontsize=12)
+plt.ylabel('Sales Units', fontsize=12)
+plt.legend()
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# 2. Create box plots to show the sales distribution for each category
+plt.figure(figsize=(8, 5))
+sns.boxplot(data=df[categories])
+plt.title('Sales Distribution for Each Product Category', fontsize=14)
+plt.xlabel('Product Category', fontsize=12)
+plt.ylabel('Sales Units', fontsize=12)
+plt.tight_layout()
+plt.show()
