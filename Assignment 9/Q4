@@ -1,0 +1,35 @@
+import re
+
+# Original text from Q1
+paragraph = (
+    "Artificial intelligence is transforming modern technology at an unprecedented pace. "
+    "Machine learning models can analyze massive datasets to uncover hidden patterns and insights. "
+    "By 2026, advanced AI systems will seamlessly integrate into our daily workflows. "
+    "Developers are constantly building state-of-the-art applications for better user experiences. "
+    "You can reach out to support@ai-tech.org or visit https://ai-tech.com for more details. "
+    "Call us at +91 9876543210 or 123-456-7890 if you have any questions."
+)
+
+# 2. Custom Tokenization Function
+def custom_tokenize(text):
+    pattern = r"\b\d+(?:\.\d+)?\b|[a-zA-Z]+(?:[-'][a-zA-Z]+)*"
+    return re.findall(pattern, text)
+
+custom_tokens = custom_tokenize(paragraph)
+print("--- Custom Tokenization Result ---")
+print(custom_tokens)
+
+# 3. Regex Substitutions (re.sub)
+cleaned_text = paragraph
+
+# a. Replace email addresses with '<EMAIL>'
+cleaned_text = re.sub(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', '<EMAIL>', cleaned_text)
+
+# b. Replace URLs with '<URL>'
+cleaned_text = re.sub(r'https?://\S+|www\.\S+', '<URL>', cleaned_text)
+
+# c. Replace phone numbers with '<PHONE>'
+cleaned_text = re.sub(r'(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}', '<PHONE>', cleaned_text)
+
+print("\n--- Text After Regex Substitutions ---")
+print(cleaned_text)
