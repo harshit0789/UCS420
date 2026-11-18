@@ -1,0 +1,48 @@
+from textblob import TextBlob
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+
+# Write a set of short product reviews
+reviews = [
+    "This laptop is absolute perfection! The display is stunning and performance is blazing fast.",
+    "Terrible customer service and the device stopped working after just two days. Very disappointed.",
+    "It is an average product. Does the job expected for the price point, nothing extraordinary.",
+    "Amazing build quality and fantastic battery life. Highly recommended for professionals!",
+    "Worst purchase ever. Complete waste of money and poor material quality."
+]
+
+classified_reviews = []
+
+# 1 & 2. Find polarity/subjectivity and classify into Positive / Negative / Neutral
+for review in reviews:
+    blob = TextBlob(review)
+    polarity = blob.sentiment.polarity
+    subjectivity = blob.sentiment.subjectivity
+    
+    if polarity > 0.1:
+        sentiment = "Positive"
+    elif polarity < -0.1:
+        sentiment = "Negative"
+    else:
+        sentiment = "Neutral"
+        
+    classified_reviews.append({'Review': review, 'Polarity': polarity, 'Subjectivity': subjectivity, 'Sentiment': sentiment})
+
+import pandas as pd
+df_reviews = pd.DataFrame(classified_reviews)
+print("--- Sentiment Analysis Results ---")
+print(df_reviews[['Sentiment', 'Polarity', 'Review']])
+
+# 3. Create a word cloud for all positive reviews
+positive_text = " ".join([r['Review'] for r in classified_reviews if r['Sentiment'] == 'Positive'])
+
+if positive_text:
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(positive_text)
+    
+    plt.figure(figsize=(10, 5))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+    plt.title('Word Cloud for Positive Reviews', fontsize=14)
+    plt.show()
+else:
+    print("No positive reviews found for word cloud generation.")
