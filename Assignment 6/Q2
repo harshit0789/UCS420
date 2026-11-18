@@ -1,0 +1,47 @@
+
+# Q2: Seaborn Bar Plot
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Create dataset
+data = {
+    "Subject": ["Maths", "Python", "DBMS", "OS", "Networks"],
+    "Score": [85, 90, 78, 88, 82]
+}
+
+# Convert into DataFrame
+df = pd.DataFrame(data)
+
+print("Subject Scores Dataset:")
+print(df)
+
+# Create different colors for each bar
+colors = sns.color_palette("Set2", 5)
+
+# Create bar plot
+plt.figure(figsize=(9, 5))
+
+ax = sns.barplot(
+    data=df,
+    x="Subject",
+    y="Score",
+    hue="Subject",
+    palette=colors,
+    legend=False
+)
+
+# Add annotations on top of each bar
+for container in ax.containers:
+    ax.bar_label(container, padding=3)
+
+# Add title and labels
+plt.title("Subject Wise Scores")
+plt.xlabel("Subjects")
+plt.ylabel("Scores")
+
+# Add grid
+plt.grid(axis='y', linestyle='--', alpha=0.5)
+
+plt.show()
