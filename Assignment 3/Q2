@@ -1,0 +1,8 @@
+
+# Q2: Selecting Specific Rows
+
+# Select rows using loc()
+selected_rows = df.loc[[0, 4, 7, 8]]
+
+print("Selected Rows:")
+print(selected_rows)
